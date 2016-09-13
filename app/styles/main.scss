@@ -106,6 +106,37 @@ $sidebar-width: 300px;
     }
 }
 
+.input-group__ya{
+    .btn{
+        background-color: #ffc800;
+        border-color: #ffc800;
+        color: #000;
+    }
+    input.form-control{
+        min-width: auto;
+        width: 180px !important;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-color: #ffc800;
+        box-shadow: none;
+        border-width: 2px;
+        transition: 0.2s;
+        // position: absolute;
+        // left: -170%;
+        &:focus{
+            box-shadow: none;
+            // position: absolute;
+            border-color: lighten(#ffc800, 6.5%);
+            width: 300px !important;
+        }
+    }
+    .glyphicon{
+        font-size: 90%;
+    }
+}
+
 @import "card.scss";
+
+@import "catalog-list.scss";
 
 @import "util.scss";

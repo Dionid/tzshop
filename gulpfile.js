@@ -4,6 +4,7 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync');
 const del = require('del');
 const wiredep = require('wiredep').stream;
+const eslint = require('gulp-eslint');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -24,7 +25,7 @@ gulp.task('styles', () => {
 });
 
 gulp.task('scripts', () => {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src('app/scripts/**/*.jsx')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -41,21 +42,34 @@ function lint(files, options) {
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
 
-gulp.task('lint', () => {
-  return lint('app/scripts/**/*.js', {
-    fix: true
-  })
-    .pipe(gulp.dest('app/scripts'));
-});
-gulp.task('lint:test', () => {
-  return lint('test/spec/**/*.js', {
-    fix: true,
-    env: {
-      mocha: true
-    }
-  })
-    .pipe(gulp.dest('test/spec/**/*.js'));
-});
+gulp.task('lint',()=>{
+    return gulp.src('app/scripts/**/*.jsx')
+                .pipe(eslint())
+                .pipe(eslint.format())
+                .pipe(eslint.failOnError());
+    // return eslint('app/scripts/**/*.jsx', baseConfig: {
+    //     "ecmaFeatures": {
+    //        "jsx": true
+    //      }
+    //  })
+    //     .pipe(gulp.dest('app/scripts/'))
+})
+
+// gulp.task('lint', () => {
+//   return lint('app/scripts/**/*.jsx', {
+//     fix: true
+//   })
+//     .pipe(gulp.dest('app/scripts'));
+// });
+// gulp.task('lint:test', () => {
+//   return lint('test/spec/**/*.js', {
+//     fix: true,
+//     env: {
+//       mocha: true
+//     }
+//   })
+//     .pipe(gulp.dest('test/spec/**/*.js'));
+// });
 
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
@@ -63,7 +77,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('docs'));
 });
 
 gulp.task('images', () => {
@@ -75,14 +89,14 @@ gulp.task('images', () => {
       // as hooks for embedding and styling
       svgoPlugins: [{cleanupIDs: false}]
     })))
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest('docs/images'));
 });
 
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
     .pipe(gulp.dest('.tmp/fonts'))
-    .pipe(gulp.dest('dist/fonts'));
+    .pipe(gulp.dest('docs/fonts'));
 });
 
 gulp.task('extras', () => {
@@ -91,10 +105,10 @@ gulp.task('extras', () => {
     '!app/*.html'
   ], {
     dot: true
-  }).pipe(gulp.dest('dist'));
+}).pipe(gulp.dest('docs'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['.tmp', 'docs']));
 
 gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   browserSync({
@@ -125,7 +139,7 @@ gulp.task('serve:dist', () => {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['dist']
+      baseDir: ['docs']
     }
   });
 });
@@ -166,7 +180,7 @@ gulp.task('wiredep', () => {
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+  return gulp.src('docs/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', ['clean'], () => {

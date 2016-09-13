@@ -13,11 +13,21 @@
 
 .navbar__logo{
     // height: 100px;
-    padding: 25px 0;
+    padding: 15px 0;
 }
 
 .navbar__secondary{
     background-color: #f6f6f6;
+    min-height: 41px;
+    li > a{
+        padding: 10px 15px;
+    }
+    li:first-child a{
+        padding-left: 0;
+    }
+    li .glyphicon{
+        padding: 12px 0 10px;
+    }
 }
 
 .navbar__breadcrumb-wr{

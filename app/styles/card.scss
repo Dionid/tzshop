@@ -13,6 +13,25 @@ $color__golden__light: #ffcc7b;
     }
 }
 
+.product-list_title{
+    font-size: 32px;
+    float: left;
+    width: 100%;
+    margin-top: 60px;
+    margin-left: 15px;
+}
+
+.product-list_subtitle{
+    margin-bottom: 45px;
+    float: left;
+    width: 100%;
+    margin-left: 15px;
+    font-size: 14px;
+    color: #969696;
+}
+
+
+
 .product-list__quart{
     .product-list_item{
         width: 285px;

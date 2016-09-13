@@ -1,36 +1,31 @@
 (function(){
-    // class Navbar {
-    //     constructor(){
-    //         this.opened_el$;
-    //         this.closeTimer;
-    //     }
-    //
-    //     closeInnerCatalog(){
-    //         if(this.opened_el$) this.opened_el$.removeClass('show');
-    //     }
-    // }
-    //
-    // var navbar = new Navbar();
-    //
-    // $('.navbar_inner-catalog-toggle').mouseenter(function(e){
-    //     navbar.closeInnerCatalog();
-    //     if(navbar.closeTimer) clearTimeout(navbar.closeTimer);
-    //     navbar.opened_el$ = $(this).closest('.navbar_inner-catalog-wr').find('.navbar_inner-catalog').addClass('show');
-    // });
-    //
-    // $('body').on('mouseleave','.navbar_inner-catalog-toggle', function(){
-    //     if(navbar.closeTimer) clearTimeout(navbar.closeTimer);
-    //     navbar.closeTimer = setTimeout(function(){
-    //         navbar.closeInnerCatalog();
-    //     }, 200)
-    // });
 
-
-    $('.aditional-info-toggle').hover(function(){
-        $(this).closest('.aditional-info-wr').addClass('card__product__editional-info-opened');
-    }, function(){
-        $(this).closest('.aditional-info-wr').removeClass('card__product__editional-info-opened');
+    var Navbar__logo = React.createClass({
+        render: function(){
+            return(
+                <div className="navbar navbar__logo">
+                  <div className="content">
+                      <div className="navbar-header">
+                        <a className="navbar-brand" href="#">Three Zeta <span style={{color:"rgb(255, 157, 0)"}}>Shop</span>    </a>
+                      </div>
+                      <ul  className="nav navbar-nav navbar-right">
+                          <li>
+                              <a href="#"><span style={{color:'#f24242'}} className="glyphicon glyphicon-heart"></span>&nbsp; Избранное</a>
+                          </li>
+                          <li>
+                              <a href="#"><span style={{color:"rgb(255, 157, 0)"}} className="glyphicon glyphicon-shopping-cart"></span>&nbsp; Корзина ( 8 т. / 24 000 руб. )</a>
+                          </li>
+                      </ul>
+                  </div>
+                </div>
+            );
+        }
     });
+
+    ReactDOM.render(<Navbar__logo />, document.getElementById('navbar_logo'))
+
+
+    // NAVBAR CATALOG
 
     var Navbar__Catalog_Columns = React.createClass({
         render: function(){
@@ -103,7 +98,7 @@
                 </li>
             );
         }
-    })
+    });
 
     var NavBar__Catalog = React.createClass({
 
@@ -179,10 +174,10 @@
                         </ul>
                     </div>
                     <form className="navbar-form navbar-right">
-                        <div className="input-group input-group__flat">
-                            <input type="text" className="form-control" placeholder="Найти товары" />
-                        <div className="input-group-btn">
-                                <button type="submit" className="btn btn-default"><span className="glyphicon glyphicon-search"></span></button>
+                        <div className="input-group input-group__ya">
+                            <input type="text" className="form-control" placeholder="Название товара" />
+                            <div className="input-group-btn">
+                                <button type="submit" className="btn btn-primary">Найти <span className="glyphicon glyphicon-search"></span></button>
                             </div>
                         </div>
                     </form>
@@ -192,61 +187,4 @@
     });
 
     ReactDOM.render(<NavBar__Catalog />, document.getElementById('navbar-catalog'));
-
-    var Navbar__logo = React.createClass({
-        render: function(){
-            return(
-                <div className="navbar navbar__logo">
-                  <div className="content">
-                      <div className="navbar-header">
-                        <a className="navbar-brand" href="#">Интернет-магазин</a>
-                      </div>
-                      <ul  className="nav navbar-nav navbar-right">
-                          <li>
-                              <a href="#"><span className="glyphicon glyphicon-shopping-cart"></span> Корзина (10 товаров)</a>
-                          </li>
-                      </ul>
-                  </div>
-                </div>
-            );
-        }
-    });
-
-    ReactDOM.render(<Navbar__logo />, document.getElementById('navbar_logo'))
-
-    var Card__Product__theme__ya = React.createClass({
-        render: function(){
-            return(
-                <div className="product-list_item">
-                    <div className="card card__product card__product__theme__ya aditional-info-wr">
-                        <div className="card_img-wr">
-                            <img className="card_img" src="http://images3.nike.com/is/image/DotCom/PDP_HERO/Nike-Air-Max-Thea-Womens-Shoe-599409_007_C_PREM.jpg" alt="" />
-                        </div>
-                        <div className="card_desc-wr">
-                            <p className="card_category">
-                                Кроссовки \ AirMax
-                            </p>
-                            <a href="" className="card_title">
-                                Heys - Vintage Traveler, чемодан пластиковый на 4 колесах
-                            </a>
-                            <p className="card_price">
-                                Цена: 10 000 руб.
-                            </p>
-                        </div>
-                        <div className="card_footer">
-                            <button className="btn btn-default" type="button" name="button"><span className="glyphicon glyphicon-shopping-cart"></span></button>
-                            <button className="btn btn-default" type="button" name="button"><span className="glyphicon glyphicon-heart"></span></button>
-                        </div>
-                        <div className="card_additional-info">
-
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-    });
-
-    ReactDOM.render(<Card__Product__theme__ya />, document.getElementById('cards__product__theme__nike'))
-
-
 })()

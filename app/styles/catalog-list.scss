@@ -1,0 +1,36 @@
+.catalog-list_item__square{
+    .panel{
+        min-height: 200px;
+        background-color: #eee;
+        border: 0;
+    }
+}
+
+.catalog-list_item__priamo{
+    .panel{
+        min-height: 100px;
+        background-color: #eee;
+        border: 0;
+    }
+}
+
+.catalog_list__theme__ya{
+    .catalog-list_item{
+        padding: 7px;
+    }
+    .panel{
+        border-radius: 3px;
+        padding: 15px 20px;
+        margin-bottom: 0;
+    }
+    .panel-heading{
+        // @extend .panel-heading;
+        padding: 0;
+        border-bottom: 0;
+        background-color: transparent;
+    }
+    .panel-title{
+        font-size: 24px;
+        font-weight: 400;
+    }
+}
